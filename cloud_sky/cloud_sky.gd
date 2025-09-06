@@ -50,6 +50,7 @@ var texture_size : int = 768: # Needs to be divisible by sqrt(frames_to_update)
 		request_full_sky_init()
 
 var sun : DirectionalLight3D
+var moon : DirectionalLight3D
 
 # Everything in the compute shader must be cached here so that it only updates
 # after swapping to a new texture.
@@ -151,6 +152,12 @@ func update_sky():
 
 	sky_material.set_shader_parameter("blend_amount", float(frame) / float(frames_to_update))
 
+	# marrs: this should only be updated when the moon moves (then again, that will happen every frame)
+	var moon_basis = moon.get_global_transform().basis;
+	#var moon_dir = moon_basis.z; # This is our forward direction pointing towards the moon
+	sky_material.set_shader_parameter('moon_world_to_object', moon_basis.inverse()); # The world to object matrix is the inverse of the basis (which is object to world)
+
+
 	RenderingServer.call_on_render_thread(_render_process.bind(texture_to_update))
 	
 	update_position.x += update_region_size
@@ -165,6 +172,10 @@ func update_sky():
 func _update_per_frame_data():
 	if sun:
 		frame_data.update_light_data(sun)
+	# TODO if there is no sunlight, we might want to use the moonlight here
+	#      but just for the clouds, the sky should stay dark
+	#if moon:
+		#frame_data.update_light_data(moon)
 	frame_data.wind_direction = Vector2.from_angle(wind_direction)
 	frame_data.wind_speed = wind_speed
 	frame_data.density = density
