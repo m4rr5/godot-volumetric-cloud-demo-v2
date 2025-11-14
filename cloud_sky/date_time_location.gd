@@ -172,12 +172,12 @@ func _process(delta: float) -> void:
 	time_in_seconds += delta * time_factor
 
 ## Returns true if the provided year is a leap year.
-func is_leap_year(year: int) -> bool:
-	return (year % 4 == 0) and (year % 400 == 0 or year % 100 != 0)
+func is_leap_year(provided_year: int) -> bool:
+	return (provided_year % 4 == 0) and (provided_year % 400 == 0 or provided_year % 100 != 0)
 
 ## Returns the number of days in the provided year, taking into account leap years.
-func days_in_year(year: int) -> int:
-	return 366 if is_leap_year(year) else 365
+func days_in_year(provided_year: int) -> int:
+	return 366 if is_leap_year(provided_year) else 365
 
 ## Sets the date and time to the wall clock as configured on the local system.
 func set_date_and_time_to_wall_clock() -> void:

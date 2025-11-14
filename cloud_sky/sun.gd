@@ -16,7 +16,7 @@ func delayed_init():
 	cloud_sky.request_full_sky_init()
 	date_time_location = cloud_sky.date_time_location
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var utc_date_and_time = date_time_location.convert_to_utc_date_and_time()
 	var pos = sun_position(utc_date_and_time.year, utc_date_and_time.day_of_the_year, utc_date_and_time.time_in_hours, date_time_location.latitude, date_time_location.longitude)
 	rotation.y = HALF_PI_F - pos.azimuth
@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 func sun_position(year: int, day_of_the_year: int, exact_hour: float, lat: float, long: float):
 	# Julian date
 	var delta = year - 1949
-	var leap = floor(delta / 4) # former leapyears
+	var leap = floor(delta / 4.0) # former leapyears
 	var julian_date = 32916.5 + delta * 365.0 + leap + day_of_the_year + exact_hour / 24.0
 
 	# The input to the Astronomer's almanach is the difference between

@@ -1,22 +1,36 @@
-[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://d15xlqtr7vk3d"]
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://d15xlqtr7vk3d"]
 
-[ext_resource type="Shader" path="res://cloud_sky/clouds.gdshader" id="1_o3hmd"]
+[ext_resource type="Shader" uid="uid://bh8s6jg1mkstx" path="res://cloud_sky/clouds.gdshader" id="1_o3hmd"]
+[ext_resource type="CompressedCubemap" uid="uid://6vy3b4u3jux8" path="res://cloud_sky/moon_color_cubemap.jpg" id="2_3yf8s"]
 [ext_resource type="Texture2D" uid="uid://262btfwc1fwn" path="res://cloud_sky/transmittance_lut.tres" id="2_ydq55"]
+[ext_resource type="CompressedCubemap" uid="uid://bxgmf3cj7sshp" path="res://cloud_sky/star_constellation_cubemap.jpg" id="4_ewj0k"]
+[ext_resource type="CompressedCubemap" uid="uid://cw7krbv0cgxo4" path="res://cloud_sky/star_color_cubemap.png" id="5_46rq4"]
 
-[sub_resource type="Texture2DRD" id="Texture2DRD_0himv"]
+[sub_resource type="Texture2DRD" id="Texture2DRD_ewj0k"]
 
-[sub_resource type="Texture2DRD" id="Texture2DRD_4pd8p"]
+[sub_resource type="Texture2DRD" id="Texture2DRD_46rq4"]
 
-[sub_resource type="Texture2DRD" id="Texture2DRD_j4yri"]
+[sub_resource type="Texture2DRD" id="Texture2DRD_8ttc2"]
 
-[sub_resource type="Texture2DRD" id="Texture2DRD_12v3d"]
+[sub_resource type="Texture2DRD" id="Texture2DRD_tfra2"]
 
 [resource]
 shader = ExtResource("1_o3hmd")
-shader_parameter/blend_amount = 0.90625
-shader_parameter/sun_disk_scale = 2.0
-shader_parameter/blend_from_texture = SubResource("Texture2DRD_0himv")
-shader_parameter/blend_to_texture = SubResource("Texture2DRD_4pd8p")
-shader_parameter/sky_blend_from_texture = SubResource("Texture2DRD_j4yri")
-shader_parameter/sky_blend_to_texture = SubResource("Texture2DRD_12v3d")
+shader_parameter/blend_from_texture = SubResource("Texture2DRD_ewj0k")
+shader_parameter/blend_to_texture = SubResource("Texture2DRD_46rq4")
+shader_parameter/sky_blend_from_texture = SubResource("Texture2DRD_8ttc2")
+shader_parameter/sky_blend_to_texture = SubResource("Texture2DRD_tfra2")
 shader_parameter/source_transmittance = ExtResource("2_ydq55")
+shader_parameter/blend_amount = 0.0
+shader_parameter/sun_disk_scale = 2.0
+shader_parameter/moon_radius = 0.05
+shader_parameter/moon_exposure = 0.0
+shader_parameter/moon_cubemap = ExtResource("2_3yf8s")
+shader_parameter/moon_world_to_object = Basis(0.783387, 0.109331, -0.611842, -0.0559278, -0.968014, -0.244584, -0.619012, 0.225823, -0.752215)
+shader_parameter/star_cubemap = ExtResource("5_46rq4")
+shader_parameter/star_exposure = 0.0
+shader_parameter/star_power = 1.0
+shader_parameter/star_latitude = 0.0
+shader_parameter/star_speed = 0.001
+shader_parameter/star_constellation_cubemap = ExtResource("4_ewj0k")
+shader_parameter/star_constellation_color = Color(0, 0.223149, 0.458204, 1)
