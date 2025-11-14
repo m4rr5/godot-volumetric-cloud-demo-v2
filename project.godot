@@ -26,6 +26,7 @@ window/vsync/vsync_mode=0
 
 [rendering]
 
+lights_and_shadows/use_physical_light_units=true
 vram_compression/import_etc2=false
 quality/screen_filters/msaa=2
 quality/screen_filters/screen_space_aa=1
